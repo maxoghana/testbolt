@@ -1,20 +1,15 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { EVENT_TYPES } from "@/lib/constants";
 
-// This needs to be a Server Component function, so it's defined outside the Client Component
 export function generateStaticParams() {
   return EVENT_TYPES.map((eventType) => ({
     id: eventType.id,
   }));
 }
 
-export default function EventTypePage() {
-  const params = useParams();
-  const id = params.id as string;
+export default function EventTypePage({ params }: { params: { id: string } }) {
+  const id = params.id;
   const eventType = EVENT_TYPES.find(e => e.id === id);
 
   return (

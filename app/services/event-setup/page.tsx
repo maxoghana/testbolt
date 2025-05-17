@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export default function EventSetupPage() {

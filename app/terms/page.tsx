@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function TermsPage() {
   return (
     <main className="pt-32 pb-16">

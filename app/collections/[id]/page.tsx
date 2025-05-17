@@ -1,6 +1,3 @@
-"use client";
-
-import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { COLLECTIONS } from "@/lib/constants";
@@ -12,10 +9,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function CollectionPage() {
-  const params = useParams();
-  const id = params.id as string;
-  const collection = COLLECTIONS.find(c => c.id === id);
+export default function CollectionPage({ params }: { params: { id: string } }) {
+  const collection = COLLECTIONS.find(c => c.id === params.id);
 
   return (
     <main className="container mx-auto px-4 py-8">

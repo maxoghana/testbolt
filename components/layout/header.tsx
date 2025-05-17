@@ -28,17 +28,17 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-sm py-3"
+          ? "bg-white shadow-md py-3"
           : "bg-transparent py-5"
       )}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span
               className={cn(
-                "text-2xl font-semibold transition-colors",
-                isScrolled ? "text-primary" : "text-primary-foreground"
+                "text-2xl font-bold transition-colors",
+                isScrolled ? "text-primary" : "text-white"
               )}
             >
               {SITE_CONFIG.logoText}
@@ -53,7 +53,7 @@ export function Header() {
                 href={item.href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
-                  isScrolled ? "text-foreground" : "text-primary-foreground"
+                  isScrolled ? "text-foreground" : "text-white"
                 )}
               >
                 {item.name}
@@ -67,35 +67,35 @@ export function Header() {
               asChild
               variant={isScrolled ? "default" : "outline"}
               className={cn(
-                "rounded-full transition-all",
+                "rounded-full",
                 !isScrolled && "border-white text-white hover:bg-white/20"
               )}
             >
               <Link href="/quote" className="flex items-center gap-2">
                 <Phone size={16} />
-                <span>Request Quote</span>
+                <span>Devis Gratuit</span>
               </Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex items-center"
+            className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
             {isOpen ? (
               <X
                 className={cn(
-                  "h-6 w-6 transition-colors",
-                  isScrolled ? "text-foreground" : "text-primary-foreground"
+                  "h-6 w-6",
+                  isScrolled ? "text-foreground" : "text-white"
                 )}
               />
             ) : (
               <Menu
                 className={cn(
-                  "h-6 w-6 transition-colors",
-                  isScrolled ? "text-foreground" : "text-primary-foreground"
+                  "h-6 w-6",
+                  isScrolled ? "text-foreground" : "text-white"
                 )}
               />
             )}
@@ -105,7 +105,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-background border-t mt-2 py-4 px-4 shadow-lg">
+        <div className="md:hidden bg-white border-t mt-2 py-4 px-4 shadow-lg">
           <nav className="flex flex-col space-y-4">
             {NAVIGATION.map((item) => (
               <Link
@@ -119,11 +119,11 @@ export function Header() {
             ))}
             <Link
               href="/quote"
-              className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md w-full justify-center"
+              className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full w-full justify-center"
               onClick={() => setIsOpen(false)}
             >
               <Phone size={16} />
-              <span>Request Quote</span>
+              <span>Devis Gratuit</span>
             </Link>
           </nav>
         </div>

@@ -18,150 +18,108 @@ import {
 } from "@/lib/constants";
 
 export default function Home() {
-  // Animation variants
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
-
-  const stagger = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
   return (
     <>
       {/* Hero Section */}
-      <HeroSection
-        title="Elevate Your Event with Premium Furniture"
-        subtitle="Curated collections of elegant furniture for weddings, corporate events, and special occasions."
-        ctaText="Explore Furniture"
-        ctaLink="/furniture"
-        secondaryCtaText="Request a Quote"
-        secondaryCtaLink="/quote"
-        backgroundImage="https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg"
-        overlayOpacity={0.5}
-      />
-
-      {/* Featured Furniture */}
-      <section className="py-20 px-4 container mx-auto">
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+      <section className="relative h-screen">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ 
+            backgroundImage: "url('https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg')",
+          }}
         >
-          <SectionHeading
-            title="Featured Furniture"
-            subtitle="Discover our most popular pieces for your next event"
-            centered
-          />
-        </motion.div>
-
-        <FurnitureGrid items={FEATURED_FURNITURE} />
-
-        <div className="mt-12 text-center">
-          <Button asChild size="lg">
-            <Link href="/furniture" className="px-6">
-              View All Furniture
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="absolute inset-0 hero-gradient" />
+        </div>
+        <div className="relative h-full flex items-center justify-center text-white text-center px-4">
+          <div className="max-w-4xl">
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-6 text-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Location de Meubles Premium
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl mb-8 text-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Pour vos événements d'exception
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Button 
+                asChild
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-6 text-lg"
+              >
+                <Link href="/quote">
+                  Demander un Devis
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Collections Showcase */}
-      <section className="py-20 bg-muted">
+      {/* Featured Categories */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <SectionHeading
-              title="Curated Collections"
-              subtitle="Perfectly coordinated furniture sets for a cohesive look"
-              centered
-            />
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {COLLECTIONS.map((collection) => (
+          <SectionHeading
+            title="Nos Catégories"
+            subtitle="Découvrez notre sélection de meubles haut de gamme"
+            centered
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            {COLLECTIONS.slice(0, 3).map((collection) => (
               <CollectionCard key={collection.id} collection={collection} />
             ))}
-          </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-20 bg-secondary">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="Nos Produits Phares"
+            subtitle="Une sélection de nos meubles les plus demandés"
+            centered
+          />
+          <FurnitureGrid items={FEATURED_FURNITURE.slice(0, 6)} columns={3} />
         </div>
       </section>
 
       {/* Event Types */}
-      <section className="py-20 container mx-auto px-4">
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
           <SectionHeading
-            title="Event Inspiration"
-            subtitle="Browse our furniture selections by event type"
+            title="Types d'Événements"
+            subtitle="Des solutions adaptées à chaque occasion"
             centered
           />
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {EVENT_TYPES.slice(0, 3).map((eventType) => (
-            <EventTypeCard key={eventType.id} eventType={eventType} />
-          ))}
-        </motion.div>
-
-        <div className="mt-12 text-center">
-          <Button asChild variant="outline" size="lg">
-            <Link href="/inspiration" className="px-6">
-              Explore All Event Types
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            {EVENT_TYPES.slice(0, 3).map((eventType) => (
+              <EventTypeCard key={eventType.id} eventType={eventType} />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <SectionHeading
-              title="What Our Clients Say"
-              subtitle="Hear from event planners and hosts who have used our furniture"
-              centered
-            />
-          </motion.div>
-
+          <SectionHeading
+            title="Ils Nous Font Confiance"
+            subtitle="Ce que nos clients disent de nous"
+            centered
+          />
           <div className="mt-12">
             <TestimonialSlider testimonials={TESTIMONIALS} />
           </div>
@@ -169,28 +127,25 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-primary text-primary-foreground">
-        <div className="container mx-auto text-center max-w-4xl">
-          <motion.div
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+      <section className="py-20 bg-primary text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Prêt à Créer Votre Événement de Rêve ?
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            Contactez-nous pour un devis personnalisé
+          </p>
+          <Button 
+            asChild
+            size="lg" 
+            variant="outline"
+            className="rounded-full px-8 py-6 text-lg border-white text-white hover:bg-white hover:text-primary"
           >
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">Ready to Transform Your Event?</h2>
-            <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
-              Let our furniture experts help you create the perfect atmosphere for your special occasion.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-                <Link href="/quote">Request a Quote</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-primary-foreground/20">
-                <Link href="/contact">Contact Us</Link>
-              </Button>
-            </div>
-          </motion.div>
+            <Link href="/quote">
+              Demander un Devis
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </section>
     </>

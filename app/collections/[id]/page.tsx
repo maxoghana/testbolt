@@ -5,6 +5,13 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { COLLECTIONS } from "@/lib/constants";
 
+// Add generateStaticParams for static site generation
+export function generateStaticParams() {
+  return COLLECTIONS.map((collection) => ({
+    id: collection.id,
+  }));
+}
+
 export default function CollectionPage() {
   const params = useParams();
   const id = params.id as string;
